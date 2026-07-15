@@ -4,314 +4,431 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>One Light. Three Meanings.</title>
+<title>Same Input, Different Output</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        font-family: "Courier New", monospace;
-    }
+* {
+    box-sizing: border-box;
+    font-family: "Courier New", monospace;
+}
 
-    body {
-        margin: 0;
-        min-height: 100vh;
-        background: #07111f;
-        color: #e8f1ff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+body {
+    margin:0;
+    min-height:100vh;
+    background:#07111f;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
-    .container {
-        width: 90%;
-        max-width: 850px;
-        padding: 30px;
-        border: 1px solid #35506e;
-        background:
-            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
-            #0b1829;
-        background-size: 30px 30px;
-        border-radius: 15px;
-    }
+.container {
+    width:90%;
+    max-width:900px;
+    background:#0c1b2e;
+    padding:30px;
+    border:1px solid #416080;
+    border-radius:15px;
+}
 
-    h1 {
-        text-align: center;
-        font-size: 2.2rem;
-        margin-bottom: 5px;
-    }
+h1 {
+    text-align:center;
+}
 
-    .subtitle {
-        text-align: center;
-        color: #9bb6d6;
-        margin-bottom: 30px;
-    }
+.subtitle {
+    text-align:center;
+    color:#9bb6d6;
+}
 
-    .system {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        align-items: center;
-    }
 
-    .signal-box {
-        background: #050b14;
-        border: 2px solid #334b66;
-        padding: 25px;
-        border-radius: 12px;
-        text-align: center;
-    }
+.grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
 
-    .light {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        margin: 12px auto;
-        background: #ff3030;
-        box-shadow: 0 0 25px #ff3030;
-    }
 
-    .label {
-        color: #7fa7d5;
-        font-size: 0.9rem;
-    }
+.panel {
+    background:#050b14;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #35506e;
+    text-align:center;
+}
 
-    button {
-        width: 100%;
-        padding: 12px;
-        margin: 7px 0;
-        background: #142941;
-        color: white;
-        border: 1px solid #47709b;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 1rem;
-    }
 
-    button:hover {
-        background: #1d3958;
-    }
+.light {
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    margin:10px auto;
+    background:#333;
+}
 
-    .output {
-        background: #050b14;
-        border: 1px solid #334b66;
-        border-radius: 12px;
-        padding: 20px;
-        min-height: 200px;
-    }
 
-    .big {
-        font-size: 1.5rem;
-        margin: 15px 0;
-    }
+.red.active {
+    background:red;
+    box-shadow:0 0 25px red;
+}
 
-    .conflict {
-        display: none;
-        margin-top: 25px;
-        padding: 20px;
-        border-left: 4px solid #62d3ff;
-        background: rgba(98,211,255,0.08);
-    }
+.yellow.active {
+    background:gold;
+    box-shadow:0 0 25px gold;
+}
 
-    .notice {
-        margin-top: 25px;
-        padding: 20px;
-        background: rgba(255,255,255,0.05);
-        border-radius: 10px;
-    }
+.green.active {
+    background:#00ff66;
+    box-shadow:0 0 25px #00ff66;
+}
 
-    .small {
-        color: #9bb6d6;
-        font-size: 0.9rem;
-    }
 
-    @media(max-width:700px){
-        .system {
-            grid-template-columns: 1fr;
-        }
+.walk {
+    font-size:40px;
+    margin:10px;
+}
+
+button {
+    width:100%;
+    padding:12px;
+    margin:6px 0;
+    background:#16314d;
+    color:white;
+    border:1px solid #47709b;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover {
+    background:#244b70;
+}
+
+
+.output {
+    margin-top:15px;
+    padding:15px;
+    border:1px solid #35506e;
+}
+
+
+.conflict {
+    display:none;
+    margin-top:20px;
+    padding:15px;
+    background:#112d42;
+    border-left:4px solid cyan;
+}
+
+
+.note {
+    margin-top:25px;
+    padding:15px;
+    background:#132338;
+}
+
+
+@media(max-width:700px){
+    .grid {
+        grid-template-columns:1fr;
     }
+}
+
 </style>
 </head>
 
 
 <body>
 
+
 <div class="container">
 
-<h1>One Light. Three Meanings.</h1>
+<h1>Same Input, Different Output</h1>
 
 <p class="subtitle">
-A traffic signal is the same object — but the rule changes with the observer.
+A traffic system experiment: how does context change meaning?
 </p>
 
 
-<div class="system">
-
-    <div class="signal-box">
-
-        <div class="label">SYSTEM INPUT</div>
-
-        <h2>Traffic Signal</h2>
-
-        <div class="light"></div>
-
-        <div class="big">RED</div>
-
-        <p class="small">
-        Same signal. Different contexts.
-        </p>
-
-    </div>
+<div class="grid">
 
 
-    <div>
+<div class="panel">
 
-        <div class="label">
-            SELECT OBSERVER ROLE
-        </div>
+<h2>🚦 Traffic Signal</h2>
 
-        <button onclick="chooseRole('driver')">
-            🚗 Driver
-        </button>
+<div id="red" class="light red active"></div>
+<div id="yellow" class="light yellow"></div>
+<div id="green" class="light green"></div>
 
-        <button onclick="chooseRole('walker')">
-            🚶 Walker
-        </button>
-
-        <button onclick="chooseRole('cyclist')">
-            🚲 Cyclist
-        </button>
+<h3 id="carState">
+RED
+</h3>
 
 
-        <div class="output">
+<h2>🚶 Pedestrian Signal</h2>
 
-            <div class="label">
-            SYSTEM OUTPUT
-            </div>
+<div id="walk" class="walk">
+✋
+</div>
 
-            <div id="result">
-                Choose a role to begin.
-            </div>
+<h3 id="pedTimer">
+WAIT
+</h3>
 
-        </div>
 
-    </div>
+</div>
+
+
+
+
+<div class="panel">
+
+<h2>Select Your Role</h2>
+
+<button onclick="role('driver')">
+🚗 Driver
+</button>
+
+<button onclick="role('walker')">
+🚶 Walker
+</button>
+
+<button onclick="role('cyclist')">
+🚲 Cyclist
+</button>
+
+
+<div class="output" id="result">
+
+Choose a role.
 
 </div>
 
 
 <div id="conflict" class="conflict">
 
-<h2>⚠ Conflict Moment</h2>
+<h3>⚠ Conflict Moment</h3>
 
 <p>
-All three observers saw the same red light:
+Same signal. Different instructions:
 </p>
 
 <p>
-🚗 Driver → STOP<br>
-🚶 Walker → MAY CROSS (depending on pedestrian signal)<br>
-🚲 Cyclist → FOLLOW BIKE/ROAD SIGNAL
-</p>
-
-<p>
-The input stayed the same.<br>
-The context changed the output.
+🚗 Driver → Follow vehicle light<br>
+🚶 Walker → Follow pedestrian signal<br>
+🚲 Cyclist → Follow bicycle/road rules
 </p>
 
 </div>
 
+</div>
 
-<div class="notice">
+
+</div>
+
+
+<div class="note">
 
 <h3>What to notice</h3>
 
 <p>
-The traffic light itself does not contain one universal action.
-The meaning comes from combining:
+The traffic light is the same input, but the role changes the output.
 </p>
 
 <p>
-<strong>Signal + Role + Rules → Action</strong>
+<strong>
+Signal + Context + Rules → Action
+</strong>
 </p>
 
-<p class="small">
-This app demonstrates how perspective and context can affect interpretation.
-It does not represent every real traffic law or situation. Real roads include
-additional signals, signs, and safety rules.
+<p>
+This simulation demonstrates context-dependent interpretation.
+It does not include every real traffic law, intersection design, or safety condition.
 </p>
 
 </div>
 
 
 </div>
+
+
 
 
 <script>
 
-let viewed = {
-    driver:false,
-    walker:false,
-    cyclist:false
+let light = "red";
+let seconds = 10;
+let seen = {
+driver:false,
+walker:false,
+cyclist:false
 };
 
 
-function chooseRole(role){
+function updateLights(){
 
-    let message = "";
-
-    if(role === "driver"){
-        message = `
-        <h2>🚗 Driver</h2>
-        <p class="big">STOP</p>
-        <p>
-        A red traffic signal tells the driver to stop
-        before entering the intersection.
-        </p>
-        `;
-    }
+document.querySelectorAll(".light")
+.forEach(x=>x.classList.remove("active"));
 
 
-    if(role === "walker"){
-        message = `
-        <h2>🚶 Walker</h2>
-        <p class="big">CHECK PEDESTRIAN SIGNAL</p>
-        <p>
-        The vehicle light may be red while a pedestrian
-        signal allows walking.
-        </p>
-        `;
-    }
+document.getElementById(light).classList.add("active");
 
 
-    if(role === "cyclist"){
-        message = `
-        <h2>🚲 Cyclist</h2>
-        <p class="big">FOLLOW CYCLING/ROAD RULES</p>
-        <p>
-        A cyclist may follow vehicle rules or separate
-        bike signals depending on the system.
-        </p>
-        `;
-    }
+document.getElementById("carState").innerHTML =
+light.toUpperCase();
 
-
-    document.getElementById("result").innerHTML = message;
-
-    viewed[role] = true;
-
-
-    if(
-        viewed.driver &&
-        viewed.walker &&
-        viewed.cyclist
-    ){
-        document.getElementById("conflict").style.display="block";
-    }
 
 }
 
+
+
+function cycle(){
+
+if(light==="red"){
+    light="green";
+    seconds=10;
+}
+
+else if(light==="green"){
+    light="yellow";
+    seconds=3;
+}
+
+else{
+    light="red";
+    seconds=10;
+}
+
+
+updateLights();
+
+}
+
+
+setInterval(()=>{
+
+seconds--;
+
+
+if(seconds<=0){
+    cycle();
+}
+
+
+updatePedestrian();
+
+
+},1000);
+
+
+
+function updatePedestrian(){
+
+let walk=document.getElementById("walk");
+let timer=document.getElementById("pedTimer");
+
+
+if(light==="red"){
+
+walk.innerHTML="🚶";
+timer.innerHTML=
+"Walk: "+seconds+" seconds";
+
+}
+
+else{
+
+walk.innerHTML="✋";
+timer.innerHTML=
+"WAIT";
+
+}
+
+}
+
+
+
+
+function role(person){
+
+seen[person]=true;
+
+
+let text="";
+
+
+if(person==="driver"){
+
+text=
+`
+<h3>🚗 Driver</h3>
+<h2>${light.toUpperCase()}</h2>
+
+<p>
+Your rule comes from the vehicle signal.
+</p>
+`;
+
+}
+
+
+if(person==="walker"){
+
+text=
+`
+<h3>🚶 Walker</h3>
+
+<h2>
+${light==="red" ? "WALK" : "WAIT"}
+</h2>
+
+<p>
+Your rule comes from the pedestrian signal.
+</p>
+`;
+
+}
+
+
+
+if(person==="cyclist"){
+
+text=
+`
+<h3>🚲 Cyclist</h3>
+
+<h2>
+CHECK BIKE RULES
+</h2>
+
+<p>
+Cyclists may share vehicle rules or have separate signals.
+</p>
+`;
+
+}
+
+
+document.getElementById("result").innerHTML=text;
+
+
+
+if(
+seen.driver &&
+seen.walker &&
+seen.cyclist
+){
+
+document.getElementById("conflict")
+.style.display="block";
+
+}
+
+
+}
+
+
 </script>
+
 
 </body>
 </html>
