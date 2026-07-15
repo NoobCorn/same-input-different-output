@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>One Light. Three Meanings.</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: "Courier New", monospace;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: #07111f;
+        color: #e8f1ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 850px;
+        padding: 30px;
+        border: 1px solid #35506e;
+        background:
+            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+            #0b1829;
+        background-size: 30px 30px;
+        border-radius: 15px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 2.2rem;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #9bb6d6;
+        margin-bottom: 30px;
+    }
+
+    .system {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .signal-box {
+        background: #050b14;
+        border: 2px solid #334b66;
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    .light {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        margin: 12px auto;
+        background: #ff3030;
+        box-shadow: 0 0 25px #ff3030;
+    }
+
+    .label {
+        color: #7fa7d5;
+        font-size: 0.9rem;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin: 7px 0;
+        background: #142941;
+        color: white;
+        border: 1px solid #47709b;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    button:hover {
+        background: #1d3958;
+    }
+
+    .output {
+        background: #050b14;
+        border: 1px solid #334b66;
+        border-radius: 12px;
+        padding: 20px;
+        min-height: 200px;
+    }
+
+    .big {
+        font-size: 1.5rem;
+        margin: 15px 0;
+    }
+
+    .conflict {
+        display: none;
+        margin-top: 25px;
+        padding: 20px;
+        border-left: 4px solid #62d3ff;
+        background: rgba(98,211,255,0.08);
+    }
+
+    .notice {
+        margin-top: 25px;
+        padding: 20px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 10px;
+    }
+
+    .small {
+        color: #9bb6d6;
+        font-size: 0.9rem;
+    }
+
+    @media(max-width:700px){
+        .system {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<h1>One Light. Three Meanings.</h1>
+
+<p class="subtitle">
+A traffic signal is the same object — but the rule changes with the observer.
+</p>
+
+
+<div class="system">
+
+    <div class="signal-box">
+
+        <div class="label">SYSTEM INPUT</div>
+
+        <h2>Traffic Signal</h2>
+
+        <div class="light"></div>
+
+        <div class="big">RED</div>
+
+        <p class="small">
+        Same signal. Different contexts.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <div class="label">
+            SELECT OBSERVER ROLE
+        </div>
+
+        <button onclick="chooseRole('driver')">
+            🚗 Driver
+        </button>
+
+        <button onclick="chooseRole('walker')">
+            🚶 Walker
+        </button>
+
+        <button onclick="chooseRole('cyclist')">
+            🚲 Cyclist
+        </button>
+
+
+        <div class="output">
+
+            <div class="label">
+            SYSTEM OUTPUT
+            </div>
+
+            <div id="result">
+                Choose a role to begin.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="conflict" class="conflict">
+
+<h2>⚠ Conflict Moment</h2>
+
+<p>
+All three observers saw the same red light:
+</p>
+
+<p>
+🚗 Driver → STOP<br>
+🚶 Walker → MAY CROSS (depending on pedestrian signal)<br>
+🚲 Cyclist → FOLLOW BIKE/ROAD SIGNAL
+</p>
+
+<p>
+The input stayed the same.<br>
+The context changed the output.
+</p>
+
+</div>
+
+
+<div class="notice">
+
+<h3>What to notice</h3>
+
+<p>
+The traffic light itself does not contain one universal action.
+The meaning comes from combining:
+</p>
+
+<p>
+<strong>Signal + Role + Rules → Action</strong>
+</p>
+
+<p class="small">
+This app demonstrates how perspective and context can affect interpretation.
+It does not represent every real traffic law or situation. Real roads include
+additional signals, signs, and safety rules.
+</p>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+let viewed = {
+    driver:false,
+    walker:false,
+    cyclist:false
+};
+
+
+function chooseRole(role){
+
+    let message = "";
+
+    if(role === "driver"){
+        message = `
+        <h2>🚗 Driver</h2>
+        <p class="big">STOP</p>
+        <p>
+        A red traffic signal tells the driver to stop
+        before entering the intersection.
+        </p>
+        `;
+    }
+
+
+    if(role === "walker"){
+        message = `
+        <h2>🚶 Walker</h2>
+        <p class="big">CHECK PEDESTRIAN SIGNAL</p>
+        <p>
+        The vehicle light may be red while a pedestrian
+        signal allows walking.
+        </p>
+        `;
+    }
+
+
+    if(role === "cyclist"){
+        message = `
+        <h2>🚲 Cyclist</h2>
+        <p class="big">FOLLOW CYCLING/ROAD RULES</p>
+        <p>
+        A cyclist may follow vehicle rules or separate
+        bike signals depending on the system.
+        </p>
+        `;
+    }
+
+
+    document.getElementById("result").innerHTML = message;
+
+    viewed[role] = true;
+
+
+    if(
+        viewed.driver &&
+        viewed.walker &&
+        viewed.cyclist
+    ){
+        document.getElementById("conflict").style.display="block";
+    }
+
+}
+
+</script>
+
+</body>
+</html>
